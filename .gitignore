@@ -1,0 +1,15 @@
+# Entorno virtual
+venv/
+
+# Archivos de Python
+__pycache__/
+
+# Configuraciones de entorno
+.env
+
+# Archivos de bases de datos locales
+
+# Configuración de IDEs
+.vscode/
+
+client_secret.json
