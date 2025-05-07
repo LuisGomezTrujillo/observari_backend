@@ -1,19 +1,25 @@
-from datetime import datetime
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, field_validator
+from typing import Optional
 
-# Esquema para registro de usuario (entrada)
-class UserCreate(BaseModel):
+class UserBase(BaseModel):
     email: EmailStr
-    password: str
 
-# Esquema para respuesta de usuario (salida)
-class UserResponse(BaseModel):
+class UserCreate(UserBase):
+    password: str
+    
+    # @field_validator("password")
+    # def password_min_length(cls, v):
+    #     if len(v) < 8:
+    #         raise ValueError("La contraseña debe tener al menos 8 caracteres")
+    #     return v
+
+class UserUpdate(BaseModel):
+    email: Optional[EmailStr] = None
+    role: Optional[str] = None
+    # No incluimos password aquí, debería ser un endpoint separado para cambiar contraseñas
+
+class UserResponse(UserBase):
     id: int
-    email: EmailStr
-    created_at: datetime
-    is_active: bool
-
-# Esquema para login
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
+    role: str = "Usuario"
+    is_active: bool = True
+    

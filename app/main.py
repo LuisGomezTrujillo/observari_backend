@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.core.database import create_db_and_tables
 from contextlib import asynccontextmanager
-from app.routers import user, auth
+from app.routers import user, auth, profile
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import APP_NAME, APP_DESCRIPTION, APP_VERSION, CORS_ORIGINS
 
@@ -35,6 +35,7 @@ def health_check():
 # Incluir routers
 app.include_router(auth.router)
 app.include_router(user.router)
+app.include_router(profile.router)
 
 if __name__ == "__main__":
     import uvicorn
