@@ -9,7 +9,7 @@ class Profile(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id", nullable=False)
     first_name: str = Field(nullable=False)
-    middle_name: Optional[str] = None
+    second_name: Optional[str] = None
     last_name: str = Field(nullable=False)
     second_last_name: Optional[str] = None
     photo_url: Optional[str] = None

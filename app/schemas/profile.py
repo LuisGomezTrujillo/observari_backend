@@ -5,7 +5,7 @@ from sqlmodel import SQLModel
 
 class ProfileBase(SQLModel):
     first_name: str
-    middle_name: Optional[str] = None
+    second_name: Optional[str] = None
     last_name: str
     second_last_name: Optional[str] = None
     photo_url: Optional[str] = None
@@ -28,7 +28,7 @@ class ProfileRead(ProfileBase):
 
 class ProfileUpdate(SQLModel):
     first_name: Optional[str] = None
-    middle_name: Optional[str] = None
+    second_name: Optional[str] = None
     last_name: Optional[str] = None
     second_last_name: Optional[str] = None
     photo_url: Optional[str] = None

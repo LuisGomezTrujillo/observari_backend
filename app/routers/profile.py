@@ -5,7 +5,7 @@ from app.core.database import get_session
 from app.models.profile import Profile
 from app.schemas.profile import ProfileCreate, ProfileRead, ProfileUpdate
 
-router = APIRouter(prefix="/api", tags=["profiles"])
+router = APIRouter(prefix="/api/profiles", tags=["profiles"])
 
 @router.post("/", response_model=ProfileRead)
 def create_profile(profile: ProfileCreate, session: Session = Depends(get_session)):
@@ -34,7 +34,7 @@ def get_profile_by_user(user_id: int, session: Session = Depends(get_session)):
     statement = select(Profile).where(Profile.user_id == user_id)
     profile = session.exec(statement).first()
     if not profile:
-        raise HTTPException(status_code=status.HTTP_201_CREATED, detail="Profile for this user not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Profile for this user not found")
     return profile
 
 
@@ -42,7 +42,7 @@ def get_profile_by_user(user_id: int, session: Session = Depends(get_session)):
 def update_profile(profile_id: int, update: ProfileUpdate, session: Session = Depends(get_session)):
     profile = session.get(Profile, profile_id)
     if not profile:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Profile not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Profile not found")
     for key, value in update.model_dump(exclude_unset=True).items():
         setattr(profile, key, value)
     session.add(profile)
