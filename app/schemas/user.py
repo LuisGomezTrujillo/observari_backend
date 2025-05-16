@@ -7,19 +7,17 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
     
-    # @field_validator("password")
-    # def password_min_length(cls, v):
-    #     if len(v) < 8:
-    #         raise ValueError("La contraseña debe tener al menos 8 caracteres")
-    #     return v
+    @field_validator("password")
+    def password_min_length(cls, v):
+        if len(v) < 4:
+            raise ValueError("La contraseña debe tener al menos 4 caracteres")
+        return v
 
 class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None
-    role: Optional[str] = None
     # No incluimos password aquí, debería ser un endpoint separado para cambiar contraseñas
 
-class UserResponse(UserBase):
+class UserRead(UserBase):
     id: int
-    role: str = "Usuario"
     is_active: bool = True
     

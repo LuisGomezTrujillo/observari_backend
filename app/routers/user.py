@@ -4,13 +4,13 @@ from typing import List
 
 from app.core.security import get_password_hash, get_current_active_user
 from app.models.user import User
-from app.schemas.user import UserCreate, UserResponse, UserUpdate
+from app.schemas.user import UserCreate, UserRead, UserUpdate
 from app.core.database import get_session
 from app.core.security import get_user_by_email
 
 router = APIRouter(prefix="/api", tags=["users"])
 
-@router.post("/users", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/users", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 def register_user(user: UserCreate, db: Session = Depends(get_session)):
     """
     Endpoint para registrar un nuevo usuario
@@ -26,14 +26,14 @@ def register_user(user: UserCreate, db: Session = Depends(get_session)):
     db.refresh(db_user)
     return db_user
 
-@router.get("/users/me", response_model=UserResponse)
+@router.get("/users/me", response_model=UserRead)
 def read_users_me(current_user: User = Depends(get_current_active_user)):
     """
     Endpoint para obtener los datos del usuario autenticado
     """
     return current_user
 
-@router.get("/users", response_model=List[UserResponse])
+@router.get("/users", response_model=List[UserRead])
 def read_users(
     skip: int = 0,
     limit: int = 100,
@@ -46,7 +46,7 @@ def read_users(
     users = db.exec(select(User).offset(skip).limit(limit)).all()
     return users
 
-@router.get("/users/{user_id}", response_model=UserResponse)
+@router.get("/users/{user_id}", response_model=UserRead)
 def read_user(
     user_id: int,
     db: Session = Depends(get_session),
@@ -60,7 +60,7 @@ def read_user(
         raise HTTPException(status_code=404, detail=f"Usuario con ID {user_id} no encontrado")
     return user
 
-@router.put("/users/{user_id}", response_model=UserResponse)
+@router.put("/users/{user_id}", response_model=UserRead)
 def update_user(
     user_id: int,
     user_update: UserUpdate,
