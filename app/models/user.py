@@ -4,6 +4,9 @@ from typing import List, Optional, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
 from pydantic import EmailStr
 
+from app.models.activity import Activity
+from app.models.activity_learner_link import ActivityLearnerLink
+
 if TYPE_CHECKING:
     from app.models.profile import Profile
     from app.models.users_relationship import UsersRelationship
@@ -25,4 +28,16 @@ class User(SQLModel, table=True):
     )
     incoming_relationships: List["UsersRelationship"] = Relationship(
         sa_relationship_kwargs={"foreign_keys": "[UsersRelationship.related_user_id]", "back_populates": "related_user"}
+    )
+
+    activities_as_guide: List["Activity"] = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Activity.guide_id]"},
+        back_populates="guide"
+    )
+    activities_as_assistant: List["Activity"] = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Activity.assistant_id]"},
+        back_populates="assistant"
+    )
+    activities_as_learner: List["ActivityLearnerLink"] = Relationship(
+        back_populates="learner"
     )

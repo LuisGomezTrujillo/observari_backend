@@ -1,23 +1,21 @@
-from pydantic import BaseModel, EmailStr, field_validator
+from datetime import datetime
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 
 class UserBase(BaseModel):
     email: EmailStr
+    is_active: bool = True
 
 class UserCreate(UserBase):
     password: str
-    
-    @field_validator("password")
-    def password_min_length(cls, v):
-        if len(v) < 4:
-            raise ValueError("La contraseña debe tener al menos 4 caracteres")
-        return v
-
-class UserUpdate(BaseModel):
-    email: Optional[EmailStr] = None
-    # No incluimos password aquí, debería ser un endpoint separado para cambiar contraseñas
 
 class UserRead(UserBase):
     id: int
-    is_active: bool = True
-    
+    created_at: datetime
+
+class UserUpdate(BaseModel):
+    email: Optional[EmailStr] = None
+    password: Optional[str] = None
+    is_active: Optional[bool] = None
+    reset_token: Optional[str] = None
+    reset_token_expires: Optional[datetime] = None

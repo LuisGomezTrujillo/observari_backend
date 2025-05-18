@@ -1,9 +1,8 @@
 from datetime import date, datetime
 from typing import Optional
-from sqlmodel import SQLModel
+from pydantic import BaseModel
 
-
-class ProfileBase(SQLModel):
+class ProfileBase(BaseModel):
     first_name: str
     second_name: Optional[str] = None
     last_name: str
@@ -14,10 +13,8 @@ class ProfileBase(SQLModel):
     home_address: Optional[str] = None
     role: Optional[str] = None
 
-
 class ProfileCreate(ProfileBase):
     user_id: int
-
 
 class ProfileRead(ProfileBase):
     id: int
@@ -25,8 +22,7 @@ class ProfileRead(ProfileBase):
     created_at: datetime
     updated_at: datetime
 
-
-class ProfileUpdate(SQLModel):
+class ProfileUpdate(BaseModel):
     first_name: Optional[str] = None
     second_name: Optional[str] = None
     last_name: Optional[str] = None
