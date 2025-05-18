@@ -9,7 +9,7 @@ router = APIRouter(prefix="/profiles", tags=["Profiles"])
 
 @router.post("/", response_model=ProfileRead)
 def create_profile(profile: ProfileCreate, session: Session = Depends(get_session)):
-    db_profile = Profile.from_orm(profile)
+    db_profile = Profile.model_validate(profile)
     session.add(db_profile)
     session.commit()
     session.refresh(db_profile)
@@ -31,7 +31,7 @@ def update_profile(profile_id: int, profile_update: ProfileUpdate, session: Sess
     profile = session.get(Profile, profile_id)
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
-    for field, value in profile_update.dict(exclude_unset=True).items():
+    for field, value in profile_update.model_dump(exclude_unset=True).items():
         setattr(profile, field, value)
     session.add(profile)
     session.commit()

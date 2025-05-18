@@ -9,7 +9,7 @@ router = APIRouter(prefix="/relationships", tags=["UsersRelationships"])
 
 @router.post("/", response_model=UsersRelationshipRead)
 def create_relationship(data: UsersRelationshipCreate, session: Session = Depends(get_session)):
-    db_obj = UsersRelationship.from_orm(data)
+    db_obj = UsersRelationship.model_validate(data)
     session.add(db_obj)
     session.commit()
     session.refresh(db_obj)
@@ -31,7 +31,7 @@ def update_relationship(relationship_id: int, data: UsersRelationshipUpdate, ses
     relationship = session.get(UsersRelationship, relationship_id)
     if not relationship:
         raise HTTPException(status_code=404, detail="Relationship not found")
-    for field, value in data.dict(exclude_unset=True).items():
+    for field, value in data.model_dump(exclude_unset=True).items():
         setattr(relationship, field, value)
     session.add(relationship)
     session.commit()

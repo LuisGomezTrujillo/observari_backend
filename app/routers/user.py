@@ -75,7 +75,7 @@ def update_user(
         raise HTTPException(status_code=404, detail=f"Usuario con ID {user_id} no encontrado")
     
     # Actualizar campos del usuario
-    update_data = user_update.dict(exclude_unset=True)
+    update_data = user_update.model_dump(exclude_unset=True)
     for key, value in update_data.items():
         setattr(db_user, key, value)
     

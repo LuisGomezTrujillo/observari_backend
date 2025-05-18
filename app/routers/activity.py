@@ -9,7 +9,7 @@ router = APIRouter(prefix="/activities", tags=["Activities"])
 
 @router.post("/", response_model=ActivityRead)
 def create_activity(activity: ActivityCreate, session: Session = Depends(get_session)):
-    db_activity = Activity.from_orm(activity)
+    db_activity = Activity.model_validate(activity)
     session.add(db_activity)
     session.commit()
     session.refresh(db_activity)
@@ -31,7 +31,7 @@ def update_activity(activity_id: int, activity_update: ActivityUpdate, session: 
     activity = session.get(Activity, activity_id)
     if not activity:
         raise HTTPException(status_code=404, detail="Activity not found")
-    for field, value in activity_update.dict(exclude_unset=True).items():
+    for field, value in activity_update.model_dump(exclude_unset=True).items():
         setattr(activity, field, value)
     session.add(activity)
     session.commit()
