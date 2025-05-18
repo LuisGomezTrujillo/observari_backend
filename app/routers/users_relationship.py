@@ -5,7 +5,7 @@ from app.models.users_relationship import UsersRelationship
 from app.schemas.users_relationship import UsersRelationshipCreate, UsersRelationshipRead, UsersRelationshipUpdate
 from app.core.database import get_session
 
-router = APIRouter(prefix="/relationships", tags=["UsersRelationships"])
+router = APIRouter(prefix="/api/relationships", tags=["UsersRelationships"])
 
 @router.post("/", response_model=UsersRelationshipRead)
 def create_relationship(data: UsersRelationshipCreate, session: Session = Depends(get_session)):

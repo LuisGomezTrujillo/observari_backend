@@ -5,7 +5,7 @@ from app.models.profile import Profile
 from app.schemas.profile import ProfileCreate, ProfileRead, ProfileUpdate
 from app.core.database import get_session
 
-router = APIRouter(prefix="/profiles", tags=["Profiles"])
+router = APIRouter(prefix="/api/profiles", tags=["Profiles"])
 
 @router.post("/", response_model=ProfileRead)
 def create_profile(profile: ProfileCreate, session: Session = Depends(get_session)):

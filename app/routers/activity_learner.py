@@ -5,7 +5,7 @@ from app.models.activity_learner import ActivityLearner
 from app.schemas.activity_learner import ActivityLearnerCreate, ActivityLearnerRead
 from app.core.database import get_session
 
-router = APIRouter(prefix="/activity-learner", tags=["ActivityLearner"])
+router = APIRouter(prefix="/api/activity-learner", tags=["ActivityLearner"])
 
 @router.post("/", response_model=ActivityLearnerRead)
 def create_link(link: ActivityLearnerCreate, session: Session = Depends(get_session)):

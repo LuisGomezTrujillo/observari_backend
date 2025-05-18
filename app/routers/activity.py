@@ -5,7 +5,7 @@ from app.models.activity import Activity
 from app.schemas.activity import ActivityCreate, ActivityRead, ActivityUpdate
 from app.core.database import get_session
 
-router = APIRouter(prefix="/activities", tags=["Activities"])
+router = APIRouter(prefix="/api/activities", tags=["Activities"])
 
 @router.post("/", response_model=ActivityRead)
 def create_activity(activity: ActivityCreate, session: Session = Depends(get_session)):
