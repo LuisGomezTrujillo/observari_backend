@@ -5,7 +5,7 @@ from sqlmodel import SQLModel, Field, Relationship
 from pydantic import EmailStr
 
 from app.models.activity import Activity
-from app.models.activity_learner_link import ActivityLearnerLink
+from app.models.activity_learner import ActivityLearner
 
 if TYPE_CHECKING:
     from app.models.profile import Profile
@@ -38,6 +38,6 @@ class User(SQLModel, table=True):
         sa_relationship_kwargs={"foreign_keys": "[Activity.assistant_id]"},
         back_populates="assistant"
     )
-    activities_as_learner: List["ActivityLearnerLink"] = Relationship(
+    activities_as_learner: List["ActivityLearner"] = Relationship(
         back_populates="learner"
     )
