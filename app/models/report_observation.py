@@ -5,7 +5,7 @@ if TYPE_CHECKING:
     from .report import Report
     from .observation import Observation
 
-class ReportObservationLink(SQLModel, table=True):
+class ReportObservation(SQLModel, table=True):
     report_id: Optional[int] = Field(default=None, foreign_key="report.id", primary_key=True)
     observation_id: Optional[int] = Field(default=None, foreign_key="observation.id", primary_key=True)
 

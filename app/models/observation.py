@@ -5,7 +5,7 @@ from sqlmodel import SQLModel, Field, Relationship
 if TYPE_CHECKING:
     from .user import User
     from .activity import Activity
-    from .report_observation_link import ReportObservationLink
+    from .report_observation import ReportObservation
 
 class Observation(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -24,4 +24,4 @@ class Observation(SQLModel, table=True):
 
     observer: Optional["User"] = Relationship(back_populates="observations")
     activity: Optional["Activity"] = Relationship()
-    reports: List["ReportObservationLink"] = Relationship(back_populates="observation")
+    reports: List["ReportObservation"] = Relationship(back_populates="observation")

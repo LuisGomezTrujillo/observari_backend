@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.core.database import create_db_and_tables
 from contextlib import asynccontextmanager
-from app.routers import activity_learner, user, auth, profile, users_relationship, activity, observation, report, report_observation_link
+from app.routers import activity_learner, report_observation, user, auth, profile, users_relationship, activity, observation, report
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import APP_NAME, APP_DESCRIPTION, APP_VERSION, CORS_ORIGINS
 
@@ -41,7 +41,7 @@ app.include_router(activity.router)
 app.include_router(activity_learner.router)
 app.include_router(observation.router)
 app.include_router(report.router)
-app.include_router(report_observation_link.router)
+app.include_router(report_observation.router)
 
 if __name__ == "__main__":
     import uvicorn
