@@ -1,4 +1,3 @@
-# Añadir estas líneas al archivo app/models/user.py
 from datetime import datetime, timezone
 from typing import List, Optional, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
@@ -10,6 +9,8 @@ from app.models.activity_learner import ActivityLearner
 if TYPE_CHECKING:
     from app.models.profile import Profile
     from app.models.users_relationship import UsersRelationship
+    from app.models.observation import Observation
+    from app.models.report import Report
 
 class User(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -21,8 +22,7 @@ class User(SQLModel, table=True):
     reset_token_expires: Optional[datetime] = Field(default=None)
 
     profile: Optional["Profile"] = Relationship(back_populates="user")
-   
-    # Añadir estas relaciones
+
     outgoing_relationships: List["UsersRelationship"] = Relationship(
         sa_relationship_kwargs={"foreign_keys": "[UsersRelationship.user_id]", "back_populates": "user"}
     )
@@ -40,4 +40,14 @@ class User(SQLModel, table=True):
     )
     activities_as_learner: List["ActivityLearner"] = Relationship(
         back_populates="learner"
+    )
+
+    observations: List["Observation"] = Relationship(back_populates="observer")
+    sent_reports: List["Report"] = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Report.report_sender]"},
+        back_populates="sender"
+    )
+    received_reports: List["Report"] = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Report.report_recipient]"},
+        back_populates="recipient"
     )
