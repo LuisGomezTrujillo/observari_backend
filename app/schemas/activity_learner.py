@@ -10,8 +10,6 @@ class ActivityLearnerCreate(ActivityLearnerBase):
 class ActivityLearnerRead(ActivityLearnerBase):
     pass
 
-class ActivityLearnerUpdate(BaseModel):
-    # Las claves primarias dobles normalmente no se actualizan,
-    # pero se puede incluir si lo deseas
+class ActivityLearnerDelete(BaseModel):
     activity_id: int
     learner_id: int

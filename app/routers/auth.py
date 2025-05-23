@@ -24,7 +24,7 @@ def send_reset_email(email: str, token: str):
     from app.core.email import send_password_reset_email
     return send_password_reset_email(email, token)
 
-router = APIRouter(prefix="/api", tags=["authentication"])
+router = APIRouter(prefix="/api", tags=["Authentication"])
 
 @router.post("/token", response_model=Token)
 async def login_for_access_token(

@@ -7,7 +7,7 @@ class EnvironmentType(str, Enum):
     LOWER = "lower"
     UPPER = "upper"
     ADOLESCENCE = "adolescence"
-    HIGH = "HIGH"
+    HIGH = "high"
 
 class RoleType(str, Enum):
     ADMINISTRATOR = "administrator"

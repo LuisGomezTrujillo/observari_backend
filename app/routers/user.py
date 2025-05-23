@@ -8,7 +8,7 @@ from app.schemas.user import UserCreate, UserRead, UserUpdate
 from app.core.database import get_session
 from app.core.security import get_user_by_email
 
-router = APIRouter(prefix="/api", tags=["users"])
+router = APIRouter(prefix="/api", tags=["Users"])
 
 @router.post("/users", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 def register_user(user: UserCreate, db: Session = Depends(get_session)):
@@ -57,7 +57,7 @@ def read_user(
     """
     user = db.get(User, user_id)
     if not user:
-        raise HTTPException(status_code=404, detail=f"Usuario con ID {user_id} no encontrado")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Usuario con ID {user_id} no encontrado")
     return user
 
 @router.put("/users/{user_id}", response_model=UserRead)
@@ -94,7 +94,7 @@ def delete_user(
     """
     db_user = db.get(User, user_id)
     if not db_user:
-        raise HTTPException(status_code=404, detail=f"Usuario con ID {user_id} no encontrado")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Usuario con ID {user_id} no encontrado")
     
     db.delete(db_user)
     db.commit()
