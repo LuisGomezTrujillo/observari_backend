@@ -10,6 +10,8 @@ class Environment(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     title: str
     environment_type: EnvironmentType
+    location: Optional[str]
+    is_active: bool
 
     areas: List["Area"] = Relationship(back_populates="environment")
     activities: List["Activity"] = Relationship(back_populates="environment")

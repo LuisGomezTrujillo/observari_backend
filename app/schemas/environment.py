@@ -6,6 +6,8 @@ from ..models.enums import EnvironmentType
 class EnvironmentBase(BaseModel):
     title: str
     environment_type: EnvironmentType
+    location: Optional[str]
+    is_active: bool
 
 
 class EnvironmentCreate(EnvironmentBase):
@@ -19,3 +21,5 @@ class EnvironmentRead(EnvironmentBase):
 class EnvironmentUpdate(BaseModel):
     title: Optional[str] = None
     environment_type: Optional[EnvironmentType] = None
+    location: Optional[str]
+    is_active: bool

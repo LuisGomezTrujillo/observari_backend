@@ -10,7 +10,7 @@ DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:password@localho
 # Configuración de seguridad para JWT
 SECRET_KEY = os.getenv("SECRET_KEY", "your_super_secret_key_here")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1"))
 
 # Configuración de la aplicación
 APP_NAME = "ObservaRI API"

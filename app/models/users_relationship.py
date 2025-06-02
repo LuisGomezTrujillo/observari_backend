@@ -2,17 +2,10 @@ from datetime import datetime, timezone
 from typing import Optional, TYPE_CHECKING
 from sqlmodel import Field, SQLModel, Relationship
 from enum import Enum
+from ..enums import RelationshipType
 
 if TYPE_CHECKING:
     from app.models.user import User
-
-class RelationshipType(str, Enum):
-    GUIDE = "guide"
-    ASSISTANT = "assistant"
-    ADMINISTRATOR = "administrator"
-    LEARNER = "learner"
-    FAMILY = "family"
-    SPONSOR = "sponsor"
 
 class UsersRelationship(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
