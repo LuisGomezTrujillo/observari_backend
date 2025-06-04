@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
-from ..models.enums import AreaType
+from ..enums import AreaType
 
 
 class AreaBase(BaseModel):

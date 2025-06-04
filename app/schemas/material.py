@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
-from ..models.enums import MaterialStatus
+from ..enums import MaterialStatus
 
 
 class MaterialBase(BaseModel):

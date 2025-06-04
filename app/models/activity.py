@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
-from .enums import ActivityType, LessonType
+from ..enums import ActivityType, LessonType
 
 if TYPE_CHECKING:
     from .user import User

@@ -1,6 +1,6 @@
 from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import Field, Relationship, SQLModel
-from .enums import AreaType
+from ..enums import AreaType
 
 if TYPE_CHECKING:
     from .environment import Environment

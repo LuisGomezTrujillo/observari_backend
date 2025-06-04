@@ -2,7 +2,7 @@
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
-from ..models.enums import ActivityType, LessonType
+from ..enums import ActivityType, LessonType
 
 
 class ActivityBase(BaseModel):

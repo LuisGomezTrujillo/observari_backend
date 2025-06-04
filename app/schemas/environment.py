@@ -1,25 +1,31 @@
 from pydantic import BaseModel
 from typing import Optional
-from ..models.enums import EnvironmentType
+from ..enums import EnvironmentType, EnvironmentStatus
 
 
 class EnvironmentBase(BaseModel):
     title: str
     environment_type: EnvironmentType
-    location: Optional[str]
-    is_active: bool
+    environment_status: EnvironmentStatus
+    location: str
+    availability: str
+    capacity: int
+    description: Optional[str]
+    photo_url: Optional[str] = None
 
 
 class EnvironmentCreate(EnvironmentBase):
     pass
 
-
 class EnvironmentRead(EnvironmentBase):
     id: int
-
 
 class EnvironmentUpdate(BaseModel):
     title: Optional[str] = None
     environment_type: Optional[EnvironmentType] = None
-    location: Optional[str]
-    is_active: bool
+    environment_status: EnvironmentStatus
+    location: str
+    availability: str
+    capacity: int
+    description: Optional[str]
+    photo_url: Optional[str] = None
