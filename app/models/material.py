@@ -13,6 +13,7 @@ class Material(SQLModel, table=True):
     title: str
     reference: str
     description: Optional[str] = None
+    photo_url: Optional[str] = None
     status: MaterialStatus
     area_id: int = Field(foreign_key="area.id")
 
