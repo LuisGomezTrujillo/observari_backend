@@ -7,6 +7,7 @@ class AreaBase(BaseModel):
     title: str
     area_type: AreaType
     environment_id: int
+    description: str
 
 
 class AreaCreate(AreaBase):
@@ -21,3 +22,4 @@ class AreaUpdate(BaseModel):
     title: Optional[str] = None
     area_type: Optional[AreaType] = None
     environment_id: Optional[int] = None
+    description: str
