@@ -14,6 +14,7 @@ class Area(SQLModel, table=True):
     area_type: AreaType
     environment_id: int = Field(foreign_key="environment.id")
     description: str
+    photo_url: Optional[str] = None
 
     environment: Optional["Environment"] = Relationship(back_populates="areas")
     materials: List["Material"] = Relationship(back_populates="area")
