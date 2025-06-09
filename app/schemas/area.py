@@ -1,3 +1,4 @@
+from datetime import datetime 
 from pydantic import BaseModel
 from typing import Optional
 from ..enums import AreaType
@@ -17,6 +18,8 @@ class AreaCreate(AreaBase):
 
 class AreaRead(AreaBase):
     id: int
+    created_at: datetime
+    updated_at: datetime
 
     
 class AreaUpdate(BaseModel):

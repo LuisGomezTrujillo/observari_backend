@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import Field, Relationship, SQLModel
 from ..enums import AreaType
@@ -15,6 +16,9 @@ class Area(SQLModel, table=True):
     environment_id: int = Field(foreign_key="environment.id")
     description: str
     photo_url: Optional[str] = None
+
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     environment: Optional["Environment"] = Relationship(back_populates="areas")
     materials: List["Material"] = Relationship(back_populates="area")
