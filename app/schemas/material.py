@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel
 from typing import Optional
 from ..enums import MaterialStatus
@@ -18,6 +19,8 @@ class MaterialCreate(MaterialBase):
 
 class MaterialRead(MaterialBase):
     id: int
+    created_at: datetime
+    updated_at: datetime
 
 
 class MaterialUpdate(BaseModel):

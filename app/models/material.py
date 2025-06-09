@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import Field, Relationship, SQLModel
 from ..enums import MaterialStatus
@@ -16,6 +17,9 @@ class Material(SQLModel, table=True):
     photo_url: Optional[str] = None
     status: MaterialStatus
     area_id: int = Field(foreign_key="area.id")
+
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     area: Optional["Area"] = Relationship(back_populates="materials")
     activities: List["Activity"] = Relationship(back_populates="material")
