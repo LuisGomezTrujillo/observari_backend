@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel
 from typing import Optional
 from ..enums import EnvironmentType, EnvironmentStatus
@@ -19,6 +20,9 @@ class EnvironmentCreate(EnvironmentBase):
 
 class EnvironmentRead(EnvironmentBase):
     id: int
+    created_at: datetime
+    updated_at: datetime
+
 
 class EnvironmentUpdate(BaseModel):
     title: Optional[str] = None
