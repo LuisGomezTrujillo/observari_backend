@@ -36,6 +36,6 @@ class Script(SQLModel, table=True):
     script_material_links: List["ScriptMaterialLink"] = Relationship(back_populates="script")
     materials: List["Material"] = Relationship(
         back_populates="scripts",
-        link_model=ScriptMaterialLink  # Use the class directly, not a string
+        link_model=ScriptMaterialLink 
     )
     activities: List["Activity"] = Relationship(back_populates="script")
