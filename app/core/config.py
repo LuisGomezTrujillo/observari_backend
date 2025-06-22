@@ -18,4 +18,5 @@ APP_DESCRIPTION = "API para Observaciones en Ambientes Montessori"
 APP_VERSION = "0.1.0"
 
 # Configuración de CORS
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+# CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "https://fundacioncasadelbambino.org").split(",")
